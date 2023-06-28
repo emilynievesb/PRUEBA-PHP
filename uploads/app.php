@@ -13,6 +13,11 @@ require_once "../vendor/autoload.php";
 $router = new \Bramus\Router\Router();
 
 //Routes
+$router->get("/campus", function () {
+
+    $instance = APP\campus\campus::getInstance(json_decode(file_get_contents("php://input"), true));
+    $instance->get_tables();
+});
 $router->get("/{tabla}", function ($tabla) {
     $class = "APP\\" . $tabla . "\\" . $tabla;
     $method = "getAll_" . $tabla;
